@@ -1,0 +1,23 @@
+* {
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #eee;
+  }
+
+  a {
+    color: aquamarine;
+  }
+  a:hover {
+    color: color-mix(in srgb, aquamarine 70%, transparent 30%);
+  }
+  a:active {
+    color: color-mix(in srgb, aquamarine 50%, transparent 50%);
+  }
+  a:visited {
+    color: mediumpurple;
+  }
+}
