@@ -6,6 +6,9 @@ const TIE = 0;
 const WIN = 1;
 const LOSE = 2;
 
+const btnDiv = document.querySelector(".buttons");
+const resultDiv = document.querySelector(".results");
+
 function getComputerChoice() {
   const option = [ROCK, PAPER, SCISSOR];
   return option[Math.floor(Math.random() * 3)];
@@ -18,45 +21,62 @@ function getHumanChoice() {
 function playRound(humanChoice, computerChoice) {
   humanChoice = humanChoice.toLowerCase();
   if (humanChoice === computerChoice) {
-    console.log(`Tie! ${humanChoice} ties with ${computerChoice}`)
+    appendResult(resultDiv, `Tie! ${humanChoice} ties with ${computerChoice}!`, TIE);
     return TIE;
   }
   switch (humanChoice) {
     case ROCK:
       switch (computerChoice) {
         case PAPER:
-          console.log(`You lose! ${humanChoice} gets beaten by ${computerChoice}!`);
+          appendResult(resultDiv, `You lose! ${humanChoice} gets beaten by ${computerChoice}!`, LOSE);
           return LOSE;
         case SCISSOR:
-          console.log(`You win! ${humanChoice} beats ${computerChoice}!`);
+          appendResult(resultDiv, `You win! ${humanChoice} beats ${computerChoice}!`, WIN);
           return WIN;
       }
       break;
     case PAPER:
       switch (computerChoice) {
         case ROCK:
-          console.log(`You win! ${humanChoice} beats ${computerChoice}!`);
+          appendResult(resultDiv, `You win! ${humanChoice} beats ${computerChoice}!`, WIN);
           return WIN;
         case SCISSOR:
-          console.log(`You lose! ${humanChoice} gets beaten by ${computerChoice}!`);
+          appendResult(resultDiv, `You lose! ${humanChoice} gets beaten by ${computerChoice}!`, LOSE);
           return LOSE;
       }
+      break;
     case SCISSOR:
       switch (computerChoice) {
         case ROCK:
-          console.log(`You lose! ${humanChoice} gets beaten by ${computerChoice}!`);
+          appendResult(resultDiv, `You lose! ${humanChoice} gets beaten by ${computerChoice}!`, LOSE);
           return LOSE;
         case PAPER:
-          console.log(`You win! ${humanChoice} beats ${computerChoice}!`);
+          appendResult(resultDiv, `You win! ${humanChoice} beats ${computerChoice}!`, WIN);
           return WIN;
       }
+      break;
   }
 }
+function appendResult(element, message, result) {
+  const msgText = document.createElement("p");
+  switch (result) {
+    case TIE:
+      msgText.style.backgroundColor = "lightgrey";
+      break;
+    case WIN:
+      msgText.style.backgroundColor = "limegreen";
+      break;
+    case LOSE:
+      msgText.style.backgroundColor = "red";
+      break;
+  }
+  msgText.textContent = message;
 
-const btnDiv = document.querySelector(".buttons")
+  element.append(msgText);
+}
 
-btnDiv.addEventListener("click", (ev) => {
-  switch (ev.target.className) {
+btnDiv.addEventListener("click", (event) => {
+  switch (event.target.className) {
     case "rock":
       playRound(ROCK, getComputerChoice());
       break;
@@ -67,4 +87,4 @@ btnDiv.addEventListener("click", (ev) => {
       playRound(SCISSOR, getComputerChoice());
       break;
   }
-})
+});

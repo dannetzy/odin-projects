@@ -2,7 +2,11 @@
   box-sizing: border-box;
 }
 
-button {
+body {
+  font-family: sans-serif;
+}
+
+.buttons button {
   width: 5rem;
   height: 5rem;
   font-size: 2rem;
@@ -12,11 +16,11 @@ button {
   margin-right: 0.5rem;
 }
 
-button:hover {
+.buttons button:hover {
   cursor: pointer;
   background-color: rgb(0 128 255 / 60%);
 }
 
-button:active {
+.buttons button:active {
   background-color: rgb(0 128 255 / 40%);
 }
