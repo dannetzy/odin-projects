@@ -2,6 +2,10 @@ const ROCK = "rock";
 const PAPER = "paper";
 const SCISSOR = "scissor";
 
+const TIE = 0;
+const WIN = 1;
+const LOSE = 2;
+
 function getComputerChoice() {
   const option = [ROCK, PAPER, SCISSOR];
   return option[Math.floor(Math.random() * 3)];
@@ -14,52 +18,59 @@ function getHumanChoice() {
 function playRound(humanChoice, computerChoice) {
   humanChoice = humanChoice.toLowerCase();
   if (humanChoice === computerChoice) {
-    humanScore += 1;
-    computerScore += 1;
     console.log("Tie!")
+    return TIE;
   }
   switch (humanChoice) {
     case ROCK:
       switch (computerChoice) {
         case PAPER:
-          computerScore += 1;
           console.log(`You lose! ${ROCK} gets beaten by ${PAPER}!`);
-          break;
+          return LOSE;
         case SCISSOR:
-          humanScore += 1;
           console.log(`You win! ${ROCK} beats ${SCISSOR}!`);
-          break;
+          return WIN;
       }
       break;
     case PAPER:
       switch (computerChoice) {
         case ROCK:
-          humanScore += 1;
           console.log(`You win! ${PAPER} beats ${ROCK}!`);
-          break;
+          return WIN;
         case SCISSOR:
-          computerScore += 1;
           console.log(`You lose! ${PAPER} gets beaten by ${SCISSOR}!`);
-          break;
+          return LOSE;
       }
     case SCISSOR:
       switch (computerChoice) {
         case ROCK:
-          computerScore += 1;
           console.log(`You lose! ${SCISSOR} gets beaten by ${ROCK}!`);
-          break;
+          return LOSE;
         case PAPER:
-          humanScore += 1;
           console.log(`You win! ${SCISSOR} beats ${PAPER}!`);
-          break;
+          return WIN;
       }
   }
 }
 
-let humanScore = 0;
-let computerScore = 0;
+function playGame() {
+  let humanScore = 0;
+  let computerScore = 0;
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+  for (let i = 0; i < 5; i++) {
+    const result = playRound(getHumanChoice(), getComputerChoice());
 
-playRound(humanSelection, computerSelection);
+    switch (result) {
+      case TIE:
+        humanScore += 1;
+        computerScore += 1;
+        break;
+      case WIN:
+        humanScore += 1;
+        break;
+      case LOSE:
+        computerScore += 1;
+        break;
+    }
+  }
+}
