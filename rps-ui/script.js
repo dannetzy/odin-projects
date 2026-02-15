@@ -11,11 +11,13 @@ function getHumanChoice() {
   return prompt(`Type "${ROCK}", "${PAPER}", or "${SCISSOR}" to play the game.`);
 }
 
-let humanScore = 0;
-let computerScore = 0;
-
 function playRound(humanChoice, computerChoice) {
   humanChoice = humanChoice.toLowerCase();
+  if (humanChoice === computerChoice) {
+    humanScore += 1;
+    computerScore += 1;
+    console.log("Tie!")
+  }
   switch (humanChoice) {
     case ROCK:
       switch (computerChoice) {
@@ -54,13 +56,8 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
-function win() {
-
-}
-
-function lose() {
-
-}
+let humanScore = 0;
+let computerScore = 0;
 
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
