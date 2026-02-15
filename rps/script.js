@@ -89,14 +89,20 @@ function appendResult(element, message, result) {
 
     if (humanScore >= 5) {
       winnerText.classList.add("win");
-      winnerText.textContent = "Congratulations, you win! The scores will be reset.";
+      winnerText.textContent = "Congratulations, you win! The scores will be reset. Clear results? ";
     } 
     if (computerScore >= 5) {
       winnerText.classList.add("lose");
-      winnerText.textContent = "You lost! The scores will be reset.";
+      winnerText.textContent = "You lost! The scores will be reset. Clear results? ";
     }
     humanScore = 0;
     computerScore = 0;
+
+    const yesClear = document.createElement("button");
+    
+    yesClear.addEventListener("click", () => element.replaceChildren());
+    yesClear.textContent = "Yes";
+    winnerText.append(yesClear);
     element.append(winnerText);
   }
 }

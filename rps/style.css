@@ -25,6 +25,10 @@ body {
   background-color: rgb(0 128 255 / 40%);
 }
 
+.results p {
+  padding: 4px;
+}
+
 .win {
   background-color: lightgreen;
 }
