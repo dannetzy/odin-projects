@@ -52,25 +52,3 @@ function playRound(humanChoice, computerChoice) {
       }
   }
 }
-
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
-
-  for (let i = 0; i < 5; i++) {
-    const result = playRound(getHumanChoice(), getComputerChoice());
-
-    switch (result) {
-      case TIE:
-        humanScore += 1;
-        computerScore += 1;
-        break;
-      case WIN:
-        humanScore += 1;
-        break;
-      case LOSE:
-        computerScore += 1;
-        break;
-    }
-  }
-}
