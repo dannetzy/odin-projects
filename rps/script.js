@@ -9,6 +9,9 @@ const LOSE = 2;
 const btnDiv = document.querySelector(".buttons");
 const resultDiv = document.querySelector(".results");
 
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
   const option = [ROCK, PAPER, SCISSOR];
   return option[Math.floor(Math.random() * 3)];
@@ -57,22 +60,45 @@ function playRound(humanChoice, computerChoice) {
       break;
   }
 }
+
 function appendResult(element, message, result) {
   const msgText = document.createElement("p");
+
+  msgText.textContent = message;
   switch (result) {
     case TIE:
-      msgText.style.backgroundColor = "lightgrey";
+      msgText.classList.add("tie")
+      msgText.textContent += ` Current score: ${humanScore}:${computerScore}.`
       break;
     case WIN:
-      msgText.style.backgroundColor = "limegreen";
+      msgText.classList.add("win")
+      humanScore += 1;
+      msgText.textContent += ` Current score: ${humanScore}:${computerScore}.`
       break;
     case LOSE:
-      msgText.style.backgroundColor = "red";
+      msgText.classList.add("lose")
+      computerScore += 1;
+      msgText.textContent += ` Current score: ${humanScore}:${computerScore}.`
       break;
   }
-  msgText.textContent = message;
-
   element.append(msgText);
+
+  if (humanScore >= 5 || computerScore >= 5) {
+    const winnerText = document.createElement("p");
+    winnerText.style.fontWeight = "bold"
+
+    if (humanScore >= 5) {
+      winnerText.classList.add("win");
+      winnerText.textContent = "Congratulations, you win! The scores will be reset.";
+    } 
+    if (computerScore >= 5) {
+      winnerText.classList.add("lose");
+      winnerText.textContent = "You lost! The scores will be reset.";
+    }
+    humanScore = 0;
+    computerScore = 0;
+    element.append(winnerText);
+  }
 }
 
 btnDiv.addEventListener("click", (event) => {

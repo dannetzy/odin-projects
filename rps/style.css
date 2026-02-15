@@ -24,3 +24,15 @@ body {
 .buttons button:active {
   background-color: rgb(0 128 255 / 40%);
 }
+
+.win {
+  background-color: lightgreen;
+}
+
+.lose {
+  background-color: lightcoral;
+}
+
+.tie {
+  background-color: lightgray;
+}
