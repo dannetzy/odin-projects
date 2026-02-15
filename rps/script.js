@@ -18,37 +18,53 @@ function getHumanChoice() {
 function playRound(humanChoice, computerChoice) {
   humanChoice = humanChoice.toLowerCase();
   if (humanChoice === computerChoice) {
-    console.log("Tie!")
+    console.log(`Tie! ${humanChoice} ties with ${computerChoice}`)
     return TIE;
   }
   switch (humanChoice) {
     case ROCK:
       switch (computerChoice) {
         case PAPER:
-          console.log(`You lose! ${ROCK} gets beaten by ${PAPER}!`);
+          console.log(`You lose! ${humanChoice} gets beaten by ${computerChoice}!`);
           return LOSE;
         case SCISSOR:
-          console.log(`You win! ${ROCK} beats ${SCISSOR}!`);
+          console.log(`You win! ${humanChoice} beats ${computerChoice}!`);
           return WIN;
       }
       break;
     case PAPER:
       switch (computerChoice) {
         case ROCK:
-          console.log(`You win! ${PAPER} beats ${ROCK}!`);
+          console.log(`You win! ${humanChoice} beats ${computerChoice}!`);
           return WIN;
         case SCISSOR:
-          console.log(`You lose! ${PAPER} gets beaten by ${SCISSOR}!`);
+          console.log(`You lose! ${humanChoice} gets beaten by ${computerChoice}!`);
           return LOSE;
       }
     case SCISSOR:
       switch (computerChoice) {
         case ROCK:
-          console.log(`You lose! ${SCISSOR} gets beaten by ${ROCK}!`);
+          console.log(`You lose! ${humanChoice} gets beaten by ${computerChoice}!`);
           return LOSE;
         case PAPER:
-          console.log(`You win! ${SCISSOR} beats ${PAPER}!`);
+          console.log(`You win! ${humanChoice} beats ${computerChoice}!`);
           return WIN;
       }
   }
 }
+
+const btnDiv = document.querySelector(".buttons")
+
+btnDiv.addEventListener("click", (ev) => {
+  switch (ev.target.className) {
+    case "rock":
+      playRound(ROCK, getComputerChoice());
+      break;
+    case "paper":
+      playRound(PAPER, getComputerChoice());
+      break;
+    case "scissor":
+      playRound(SCISSOR, getComputerChoice());
+      break;
+  }
+})
