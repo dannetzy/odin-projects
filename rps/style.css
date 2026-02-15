@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+button {
+  width: 5rem;
+  height: 5rem;
+  font-size: 2rem;
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 16px;
+  margin-right: 0.5rem;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(0 128 255 / 50%);
+}
