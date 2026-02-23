@@ -19,7 +19,7 @@ body {
   gap: 0.25rem;
 }
 
-#result {
+.result {
   height: 50px;
   background-color: rgb(255 255 255 / 10%);
   border: none;

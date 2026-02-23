@@ -1,41 +1,67 @@
 
 
 const calc = document.querySelector('.calc');
-const result = document.querySelector('#result');
+const result = document.querySelector('.result');
+
+const resultFirst = result.children[0];
+const resultOperand = result.children[1];
+const resultLast = result.children[2];
+
+const operations = {
+  '+'(a, b) {
+    return a + b;
+  },
+  '-'(a, b) {
+    return a - b;
+  },
+  '*'(a, b) {
+    return a * b;
+  },
+  '/'(a, b) {
+    if (b === 0) {
+      return "wtf man";
+    }
+    const result = a / b;
+    return Number(result.toFixed(10));
+  }
+}
+
+let first, operand, last;
 
 calc.addEventListener("click", (event) => {
   if (event.target.classList.contains('numbers')) {
-    result.value += event.target.textContent;
+    result.children[resultOperand.textContent === '' ? 0 : 2].textContent += event.target.textContent;
+  }
+  if (event.target.classList.contains('operation')) {
+    if (resultLast.textContent === '') {
+      resultOperand.textContent = event.target.textContent;
+    } else {
+      evaluate();
+      resultOperand.textContent = event.target.textContent;
+    }
   }
   if (event.target.classList.contains('clear')) {
-    result.value = '';
+    clear();
   }
-  if (event.target.classList.contains('divide')) {
-    result.value += '/';
-  }
-  if (event.target.classList.contains('multiply')) {
-    result.value += '*';
-  }
-  if (event.target.classList.contains('subtract')) {
-    result.value += '-';
-  }
-  if (event.target.classList.contains('add')) {
-    result.value += '+';
+  if (event.target.classList.contains('equal')) {
+    evaluate();
   }
 });
 
-function add(a, b) {
-  return a + b;
+function clear() {
+  for (const child of result.children)
+    child.textContent = '';
 }
 
-function substract(a, b) {
-  return a - b;
-}
+function evaluate() {
+  for (const child of result.children) {
+    if (child.textContent === '') return;
+  }
 
-function multiply(a, b) {
-  return a * b;
-}
+  const first = Number(resultFirst.textContent);
+  const operand = resultOperand.textContent;
+  const last = Number(resultLast.textContent);
 
-function divide(a, b) {
-  return a / b;
+  clear();
+  resultFirst.textContent = operations[operand](first, last);
 }
