@@ -28,6 +28,7 @@ body {
   color: inherit;
   font-size: 2rem;
   width: calc(75px * 4 + 4px * 3);
+  text-align: right;
 }
 
 .calc-btn {
@@ -44,6 +45,10 @@ body {
   background-color: rgb(255 255 255 / 5%);
 }
 
+.calc-btn:active {
+  background-color: rgb(255 255 255 / 3%);
+}
+
 .operation {
   font-weight: lighter;
   background-color: rgb(255 255 255 / 5%);
@@ -53,6 +58,10 @@ body {
   background-color: rgb(255 255 255 / 10%);
 }
 
+.operation:active {
+  background-color: rgb(255 255 255 / 5%);
+}
+
 .equal {
   background-color: #e0a4c8;
   color: black;
@@ -60,4 +69,9 @@ body {
 
 .equal:hover {
   background-color: color-mix(in srgb, #e0a4c8 80%, transparent 20%);
+}
+
+.equal:active {
+  background-color: color-mix(in srgb, #e0a4c8 70%, transparent 30%);
+  color: color-mix(in srgb, black 50%, transparent 50%);
 }
