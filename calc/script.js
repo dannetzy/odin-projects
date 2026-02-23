@@ -19,7 +19,8 @@ const operations = {
   },
   '/'(a, b) {
     if (b === 0) {
-      return "wtf man";
+      alert("sorry you can't do that :(");
+      return clear();
     }
     const result = a / b;
     return Number(result.toFixed(10));
@@ -30,9 +31,16 @@ let first, operand, last;
 
 calc.addEventListener("click", (event) => {
   if (event.target.classList.contains('numbers')) {
+    if (calc.classList.contains('clear')) {
+      calc.classList.remove('clear');
+      clear();
+    }
     result.children[resultOperand.textContent === '' ? 0 : 2].textContent += event.target.textContent;
   }
   if (event.target.classList.contains('operation')) {
+    if (calc.classList.contains('clear')) {
+      calc.classList.remove('clear');
+    }
     if (resultLast.textContent === '') {
       resultOperand.textContent = event.target.textContent;
     } else {
@@ -44,7 +52,7 @@ calc.addEventListener("click", (event) => {
     clear();
   }
   if (event.target.classList.contains('equal')) {
-    evaluate();
+    if (!evaluate()) calc.classList.add('clear');
   }
 });
 
@@ -55,7 +63,7 @@ function clear() {
 
 function evaluate() {
   for (const child of result.children) {
-    if (child.textContent === '') return;
+    if (child.textContent === '') return true;
   }
 
   const first = Number(resultFirst.textContent);
