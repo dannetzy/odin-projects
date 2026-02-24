@@ -1,5 +1,3 @@
-
-
 const calc = document.querySelector('.calc');
 const result = document.querySelector('.result');
 
@@ -41,12 +39,10 @@ calc.addEventListener("click", (event) => {
     if (calc.classList.contains('clear')) {
       calc.classList.remove('clear');
     }
-    if (resultLast.textContent === '') {
-      resultOperand.textContent = event.target.textContent;
-    } else {
+    if (resultLast.textContent !== '') {
       evaluate();
-      resultOperand.textContent = event.target.textContent;
     }
+    resultOperand.textContent = event.target.textContent;
   }
   if (event.target.classList.contains('clear')) {
     clear();
@@ -57,13 +53,16 @@ calc.addEventListener("click", (event) => {
 });
 
 function clear() {
-  for (const child of result.children)
+  for (const child of result.children) {
     child.textContent = '';
+  }
 }
 
 function evaluate() {
   for (const child of result.children) {
-    if (child.textContent === '') return true;
+    if (child.textContent === '') {
+      return true;
+    }
   }
 
   const first = Number(resultFirst.textContent);
